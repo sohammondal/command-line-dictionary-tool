@@ -1,0 +1,25 @@
+{
+  "name": "command-line-dictionary-tool",
+  "version": "1.0.0",
+  "description": "A Command Line Dictionary Tool",
+  "main": "index.js",
+  "bin": {
+    "dict": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dict",
+    "cli"
+  ],
+  "author": "Soham Mondal",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chalk": "^3.0.0",
+    "clui": "^0.3.6",
+    "figlet": "^1.3.0",
+    "inquirer": "^7.0.4"
+  }
+}
