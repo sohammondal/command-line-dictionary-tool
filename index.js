@@ -7,10 +7,11 @@ const {
     getWordAntonyms,
     getWordDefinitions,
     getWordFullDetails,
-    getRandomWordFullDetails
+    getRandomWordFullDetails,
+    playWordGame
 } = require('./lib/apis'); // Word APIs
 
-const main = (args = process.argv.slice(2)) => {
+const main = async (args = process.argv.slice(2)) => {
 
     const option = args[0];
     const word = args[1];
@@ -34,7 +35,8 @@ const main = (args = process.argv.slice(2)) => {
             break;
 
         case 'play': // Word Game
-
+            const start = await playWordGame();
+            start();
             break;
 
         default:
