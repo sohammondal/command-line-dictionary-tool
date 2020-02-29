@@ -1,4 +1,4 @@
-const { getRandomWord, getWordExamples } = require('../lib/routes');
+const { getRandomWord, getWordExamples, getWordDefinitions, getWordSynonyms, getWordAntonyms } = require('../lib/routes');
 
 const mockKnownWord = 'shift';
 const mockUnknownWord = 'uplift';
@@ -6,16 +6,43 @@ const mockUnknownWord = 'uplift';
 describe('Testing Word Routes', () => {
 
     it('should return a random string', () => {
-        expect(getRandomWord()).resolves.toBeInstanceOf(String);
+        return expect(getRandomWord().then(randomWord => typeof randomWord)).resolves.toBe("string");
     })
 
-    describe('/word/{word}/examples route test', () => {
+    describe('Testing {apihost}/word/{word}/examples', () => {
         it('should return examples of known word', () => {
-            expect(getWordExamples(mockKnownWord)).resolves.toBeInstanceOf(Array);
+            return expect(getWordExamples(mockKnownWord)).resolves.toBeInstanceOf(Array);
         })
 
         it('should throw error for examples of unknown word', () => {
-            expect(getWordExamples(mockUnknownWord)).rejects.toBe('Error: word not found');
+            return expect(getWordExamples(mockUnknownWord)).rejects.toBe('Error: word not found');
+        })
+    })
+
+    describe('Testing {apihost}/word/{word}/definitions', () => {
+        it('should return definitions of known word', () => {
+            return expect(getWordDefinitions(mockKnownWord)).resolves.toBeInstanceOf(Array);
+        })
+        it('should reject because of unknown word', () => {
+            return expect(getWordDefinitions(mockUnknownWord)).rejects.toMatch('Error: word not found');
+        })
+    })
+
+    describe('Testing {apihost}/word/{word}/relatedWords for synonyms', () => {
+        it('should return synonyms of known word', () => {
+            return expect(getWordSynonyms(mockKnownWord)).resolves.toBeInstanceOf(Array);
+        })
+        it('should reject because of unknown word', () => {
+            return expect(getWordSynonyms(mockUnknownWord)).rejects.toMatch('Error: word not found');
+        })
+    })
+
+    describe('Testing {apihost}/word/{word}/relatedWords for antonyms', () => {
+        it('should return antonyms of known word', () => {
+            return expect(getWordAntonyms(mockKnownWord)).resolves.toBeInstanceOf(Array);
+        })
+        it('should reject because of unknown word', () => {
+            return expect(getWordAntonyms(mockUnknownWord)).rejects.toMatch('Error: word not found');
         })
     })
 
